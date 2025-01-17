@@ -7,7 +7,6 @@ public class WarriorManager : MonoBehaviour
     public List<WarriorController> selectedWarriors = new List<WarriorController>();
     public LayerMask ground;
 
-    private float formationCenterZ;
     public int numRanks = 3;
     public float rowSpacing = 2.0f;
     public float columnSpacing = 1.5f;
@@ -37,13 +36,10 @@ public class WarriorManager : MonoBehaviour
 
                     for (int i = 0; i < totalWarriors; i++)
                     {
-                        // Determine which row and column this warrior is in
                         int rowIndex = i % numRanks;
                         int colIndex = i / numRanks;
-
-                        // Offset them so each new row is behind (negative Z)
+                        
                         float offsetZ = -rowIndex * rowSpacing;
-                        // Offset them left-right in X, centered around the click
                         float offsetX = (colIndex - formationCenterX) * columnSpacing;
 
                         selectedWarriors[i].MoveTo(hit.point + new Vector3(offsetX, 0, offsetZ));
